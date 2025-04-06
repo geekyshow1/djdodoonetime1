@@ -1,0 +1,3 @@
+DODO_PAYMENTS_API_KEY = "use_your_own"
+DODO_API_URL = "https://test.dodopayments.com"
+DODO_WEBHOOK_SECRET = "use_your_own"

@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">Product List</h1>
+
+  {% if products %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {% for product in products %}
+              <div class="bg-white rounded-lg shadow hover:shadow-lg p-6 transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                      <h2 class="text-xl font-semibold text-gray-800">{{ product.name }}</h2>
+                      <p class="text-gray-600 mt-2">Price: <span class="font-medium">$ {{ product.price|floatformat:2 }}</span> {{ product.currency }}</p>
+                   
+                      <p class="text-xs text-gray-400 mt-2">Created at: {{ product.created_at|date:"M d, Y" }}</p>
+                  </div>
+                  <div class="mt-4">
+                      <a href="{% url 'checkout' product.id %}" class="w-full block text-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition duration-200">
+                          Buy Now
+                      </a>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  {% else %}
+      <p class="text-center text-gray-500">No products found.</p>
+  {% endif %}
+</div>
+{% endblock content %}

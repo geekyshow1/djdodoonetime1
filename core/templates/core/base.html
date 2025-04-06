@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>{% block title %}DODO Payments{% endblock title %}</title>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Navigation -->
+  <nav class="bg-purple-600 shadow mb-8">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-xl font-semibold text-white">
+        <a href="/">My Store</a>
+      </div>
+      <div class="space-x-4">
+        <a href="{% url 'home' %}" class="text-gray-100 hover:text-gray-200">Home</a>
+        {% if user.is_authenticated %} 
+        <a href="{% url 'product_create' %}" class="text-gray-100 hover:text-gray-200">Create Product</a>
+        <form action="{% url 'logout' %}" method="post" class="inline">
+          {% csrf_token %}
+          <button type="submit" class="text-gray-100 hover:text-gray-200 cursor-pointer">Logout</button>
+        </form>
+        {% else %} 
+        <a href="{% url 'login' %}" class="text-gray-100 hover:text-gray-200">Login</a>
+        <a href="{% url 'register' %}" class="text-gray-100 hover:text-gray-200">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page content -->
+  <main class="max-w-7xl mx-auto px-4">
+    {% block content %}{% endblock content %}
+  </main>
+</body>
+</html>

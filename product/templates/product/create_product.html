@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<div class="bg-gray-100 flex items-center justify-center">
+<div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Create Product</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Product Name -->
+        <div class="mb-4">
+            <label for="id_name" class="block text-gray-700 font-medium mb-2">Product Name</label>
+            <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                   placeholder="Enter product name">
+            {% if form.name.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Price -->
+        <div class="mb-4">
+            <label for="id_price" class="block text-gray-700 font-medium mb-2">Price (in USD)</label>
+            <input type="number" step="0.01" name="price" id="id_price" value="{{ form.price.value|default:'' }}"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                   placeholder="Enter price">
+            {% if form.price.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.price.errors.0 }}</p>
+            {% endif %}
+        </div>
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300">
+            Create Product
+        </button>
+    </form>
+</div>
+
+
+{% endblock content %}
